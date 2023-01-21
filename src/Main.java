@@ -2,26 +2,20 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in); // "System.in" pour entrer clavier
+//      String mot = sc.nextLine(); // Le sc.next c'est ou est stocker le mot de l'entree clavier, "next", lire un mot
+        Panel pa = new Panel();
 
-        System.out.print("Le mot à trouvé : ");
-        String mot = sc.nextLine(); // Le sc.next c'est ou est stocker le mot de l'entree clavier, "next", lire un mot
-        Pendu p = FonctionPendu.init(mot); // Initialise selon le mot
-
+        Pendu p = FonctionPendu.init(pa);
         while (!FonctionPendu.estFini(p))
         {
-            System.out.print("Entrée une lettre : ");
-            char c = sc.next().charAt(0); // On choisis la lettre que l'on veut grace a "charArt"
+            char c = pa.lettre(p);
             FonctionPendu.jouerLettre(p,c);
 
-            System.out.println(FonctionPendu.mot(p).toString() + ",  " + FonctionPendu.nombreErreur(p) + "/" + Pendu.MAX + "<- erreurs"); // To string convertir en String
-
+            pa.affichage(p);
             if (FonctionPendu.estGagne(p))
-                System.out.println("Bravo !");
+                pa.Gagne(p);
             else if (FonctionPendu.estFini(p))
-            {
-                System.out.println("Dommage, Bien joué !");
-                System.out.println("Le mot c'était : " + p.motATrouve);
-            }
+                pa.Perdu(p);
         }
     }
 }

@@ -1,9 +1,15 @@
+import javax.swing.*;
 public class FonctionPendu { // Les fonctions
-
-    public static Pendu init(String mot) {
-        assert (mot.length() > 0);
-
+    public static Pendu init(Panel pa) {
         Pendu p = new Pendu(); // On creer la classe
+        p.motATrouve = pa.PanelMot();
+
+        if (p.motATrouve == null) {
+            System.err.println("Vous devez mettre un mot.");
+            System.exit(-1);
+        }
+
+        String mot = p.motATrouve;
         p.motATrouve = mot.toUpperCase();
         p.nbrErr = 0;
         p.lettreTrouvees = new boolean[mot.length()];
@@ -17,10 +23,7 @@ public class FonctionPendu { // Les fonctions
 
         for (int i = 0; i < mot.length(); ++i) { // Arrays.fill(p.trouve, false) la meme chose
             char tmp = p.motATrouve.charAt(i);
-            if (!Character.isLetter(tmp))
-                p.lettreTrouvees[i] = true;
-            else
-                p.lettreTrouvees[i] = false;
+            p.lettreTrouvees[i] = !Character.isLetter(tmp);
         }
         return p;
     }
@@ -51,7 +54,6 @@ public class FonctionPendu { // Les fonctions
     }
 
     public static boolean estGagne (Pendu p) {
-        assert (estFini(p));
         for (boolean b : p.lettreTrouvees)
             if (!b) // Si une case est fausse
                 return false;
