@@ -35,7 +35,7 @@ public class FonctionPendu { // Les fonctions
         if (tmp == -1)
             p.nbrErr++;
 
-        while (tmp >= 0) { // Si il trouve une occurence
+        while (tmp >= 0) { // Si il trouve une occurence.
             p.motComplet.setCharAt(tmp, c);
 
             p.lettreTrouvees[tmp] = true; // On met la case vrai
